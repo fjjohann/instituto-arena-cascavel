@@ -1,0 +1,9 @@
+.next
+.next.backup.*
+node_modules
+.codex-tools
+.env*.local
+dist
+out
+*.log
+.DS_Store
