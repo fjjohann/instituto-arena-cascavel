@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { fileFromForm, galleryValues, moneyValue, nullableText, requireAdmin, slugify } from "@/lib/admin";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -17,29 +16,6 @@ export async function signIn(formData: FormData) {
 
   if (error) redirect("/admin?erro=login");
   redirect("/admin/painel");
-}
-
-export async function signInWithMagicLink(formData: FormData) {
-  const supabase = await createSupabaseServerClient();
-  if (!supabase) redirect("/admin?erro=configuracao");
-
-  const email = String(formData.get("email") ?? "").trim();
-  if (!email || (process.env.ADMIN_EMAIL && email !== process.env.ADMIN_EMAIL)) {
-    redirect("/admin?erro=permissao");
-  }
-
-  const headerStore = await headers();
-  const origin = headerStore.get("origin") ?? process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  const { error } = await supabase.auth.signInWithOtp({
-    email,
-    options: {
-      emailRedirectTo: `${origin}/auth/callback?next=/admin/painel`,
-      shouldCreateUser: false
-    }
-  });
-
-  if (error) redirect("/admin?erro=magic-link");
-  redirect("/admin?link=1");
 }
 
 export async function signOut() {
