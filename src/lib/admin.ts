@@ -7,6 +7,10 @@ export async function requireAdmin() {
 
   const { data, error } = await supabase.auth.getUser();
   if (error || !data.user) redirect("/admin");
+  if (process.env.ADMIN_EMAIL && data.user.email !== process.env.ADMIN_EMAIL) {
+    await supabase.auth.signOut();
+    redirect("/admin?erro=permissao");
+  }
 
   return { supabase, user: data.user };
 }
