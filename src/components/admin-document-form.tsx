@@ -96,7 +96,7 @@ export function AdminDocumentForm({ document }: { document?: TransparencyDocumen
       </Field>
 
       <Field label="Arquivo PDF" name="pdf_file">
-        <input ref={fileRef} accept="application/pdf" className="min-h-11 rounded-md border border-forest/15 bg-white px-3 py-2 text-ink" name="pdf_file" required={!document} type="file" />
+        <input ref={fileRef} accept="application/pdf" className="min-h-11 rounded-md border border-forest/15 bg-white px-3 py-2 text-ink" required={!document} type="file" />
       </Field>
       {uploadError ? <p className="rounded-md border border-red-200 bg-red-50 p-3 text-sm font-semibold text-red-700">{uploadError}</p> : null}
 
