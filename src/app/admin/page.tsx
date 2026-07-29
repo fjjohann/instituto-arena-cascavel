@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { signIn } from "@/app/admin/actions";
+import { signIn, signInWithMagicLink } from "@/app/admin/actions";
 import { createSupabaseServerClient, hasSupabaseEnv } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { title: "Admin" };
 
-export default async function Page({ searchParams }: { searchParams: Promise<{ erro?: string }> }) {
+export default async function Page({ searchParams }: { searchParams: Promise<{ erro?: string; link?: string }> }) {
   const params = await searchParams;
   const supabase = await createSupabaseServerClient();
   const { data } = supabase ? await supabase.auth.getUser() : { data: { user: null } };
@@ -21,7 +21,15 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ e
           </p>
         ) : null}
         {params.erro ? <p className="mt-4 rounded-md bg-red-50 p-4 text-sm text-red-700">Não foi possível acessar. Verifique as credenciais.</p> : null}
+        {params.link ? <p className="mt-4 rounded-md border border-lime/40 bg-lime/15 p-4 text-sm font-semibold text-forest">Enviamos um link de acesso para o e-mail administrador.</p> : null}
+        <form action={signInWithMagicLink} className="mt-6 grid gap-4 rounded-md bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-semibold text-forest">Acesso por link seguro</h2>
+          <p className="text-sm leading-6 text-muted">Informe o e-mail administrador para receber um link de entrada no painel.</p>
+          <label className="grid gap-2 text-sm font-semibold text-forest">E-mail<input className="min-h-11 rounded-md border border-forest/15 px-3" name="email" required type="email" /></label>
+          <button className="min-h-11 rounded-md bg-lime px-5 py-3 text-sm font-semibold text-ink" type="submit">Enviar link de acesso</button>
+        </form>
         <form action={signIn} className="mt-6 grid gap-4 rounded-md bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-semibold text-forest">Acesso por senha</h2>
           <label className="grid gap-2 text-sm font-semibold text-forest">E-mail<input className="min-h-11 rounded-md border border-forest/15 px-3" name="email" required type="email" /></label>
           <label className="grid gap-2 text-sm font-semibold text-forest">Senha<input className="min-h-11 rounded-md border border-forest/15 px-3" name="password" required type="password" /></label>
           <button className="min-h-11 rounded-md bg-lime px-5 py-3 text-sm font-semibold text-ink" type="submit">Entrar</button>
