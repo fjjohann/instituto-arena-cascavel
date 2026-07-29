@@ -35,10 +35,10 @@ async function uploadPublicFile(bucket: string, file: File, prefix: string) {
     upsert: false
   });
 
-  if (error) throw new Error(error.message);
+  if (error) return { error: error.message, url: null };
 
   const { data } = supabase.storage.from(bucket).getPublicUrl(path);
-  return data.publicUrl;
+  return { error: null, url: data.publicUrl };
 }
 
 export async function saveProject(formData: FormData) {
@@ -53,7 +53,9 @@ export async function saveProject(formData: FormData) {
   const coverFile = fileFromForm(formData.get("cover_image"));
   if (coverFile) {
     if (!coverFile.type.startsWith("image/")) redirect("/admin/painel/projetos?erro=imagem");
-    coverImageUrl = await uploadPublicFile("project-images", coverFile, "covers");
+    const upload = await uploadPublicFile("project-images", coverFile, "covers");
+    if (upload.error) redirect(`/admin/painel/projetos?erro=${encodeURIComponent(upload.error)}`);
+    coverImageUrl = upload.url;
   }
 
   const payload = {
@@ -111,7 +113,9 @@ export async function saveTransparencyDocument(formData: FormData) {
 
   if (pdfFile) {
     if (pdfFile.type !== "application/pdf") redirect("/admin/painel/transparencia?erro=pdf");
-    pdfUrl = await uploadPublicFile("transparency-documents", pdfFile, "documentos");
+    const upload = await uploadPublicFile("transparency-documents", pdfFile, "documentos");
+    if (upload.error) redirect(`/admin/painel/transparencia?erro=${encodeURIComponent(upload.error)}`);
+    pdfUrl = upload.url;
   }
 
   if (!pdfUrl) redirect("/admin/painel/transparencia?erro=pdf");
