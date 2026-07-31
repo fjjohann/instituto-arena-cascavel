@@ -29,9 +29,6 @@ export default async function Page() {
           {groupedDocuments.map(({ category, items }) => (
             <article className="rounded-md bg-white p-6 shadow-sm" key={category}>
               <h2 className="text-2xl font-semibold text-forest">{category}</h2>
-              <p className="mt-2 text-sm text-muted">
-                {items.length === 1 ? "1 documento publicado nesta categoria." : `${items.length} documentos publicados nesta categoria.`}
-              </p>
               <div className="mt-5 flex flex-wrap gap-3">
                 {items.map((document) => (
                   <a className="inline-flex min-h-10 items-center rounded-md bg-forest px-4 py-2 text-sm font-semibold text-white transition hover:bg-lime hover:text-ink" href={document.pdf_url} key={document.id} rel="noreferrer" target="_blank" title={`${document.title} · ${date(document.publication_date)}`}>
