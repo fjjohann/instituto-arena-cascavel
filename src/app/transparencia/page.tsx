@@ -7,6 +7,7 @@ import type { TransparencyDocument } from "@/lib/supabase/types";
 export const metadata: Metadata = { title: "Transparência" };
 
 const categoryOrder = [
+  "Estrutura Organizacional",
   "Estatuto",
   "CNPJ e documentos institucionais",
   "Projetos aprovados",

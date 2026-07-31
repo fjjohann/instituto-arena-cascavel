@@ -7,6 +7,7 @@ import type { TransparencyDocument } from "@/lib/supabase/types";
 import { useRef, useState, type FormEvent } from "react";
 
 const categories = [
+  "Estrutura Organizacional",
   "Estatuto",
   "CNPJ e documentos institucionais",
   "Projetos aprovados",
