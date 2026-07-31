@@ -26,23 +26,15 @@ export default async function Page() {
         <div className="grid gap-5 lg:grid-cols-2">
           {groupedDocuments.map(({ category, items }) => (
             <article className="rounded-md bg-white p-6 shadow-sm" key={category}>
-              <p className="text-sm font-semibold uppercase text-lime">Categoria</p>
-              <h2 className="mt-1 text-2xl font-semibold text-forest">{category}</h2>
-              <div className="mt-5 grid gap-3">
+              <h2 className="text-2xl font-semibold text-forest">{category}</h2>
+              <p className="mt-2 text-sm text-muted">
+                {items.length === 1 ? "1 documento publicado nesta categoria." : `${items.length} documentos publicados nesta categoria.`}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3">
                 {items.map((document) => (
-                  <div className="rounded-md border border-forest/10 p-4" key={document.id}>
-                    <p className="text-xs font-semibold uppercase text-muted">{date(document.publication_date)}</p>
-                    <h3 className="mt-1 text-lg font-semibold text-forest">{document.title}</h3>
-                    {document.description ? <p className="mt-1 text-sm leading-6 text-muted">{document.description}</p> : null}
-                    <div className="mt-4 flex flex-wrap gap-3">
-                      <a className="inline-flex min-h-10 items-center rounded-md bg-lime px-4 py-2 text-sm font-semibold text-ink" href={document.pdf_url} rel="noreferrer" target="_blank">
-                        Visualizar PDF
-                      </a>
-                      <a className="inline-flex min-h-10 items-center rounded-md border border-forest/15 px-4 py-2 text-sm font-semibold text-forest" download href={document.pdf_url}>
-                        Baixar PDF
-                      </a>
-                    </div>
-                  </div>
+                  <a className="inline-flex min-h-10 items-center rounded-md bg-forest px-4 py-2 text-sm font-semibold text-white transition hover:bg-lime hover:text-ink" href={document.pdf_url} key={document.id} rel="noreferrer" target="_blank" title={`${document.title} · ${date(document.publication_date)}`}>
+                    {document.title}
+                  </a>
                 ))}
               </div>
             </article>
