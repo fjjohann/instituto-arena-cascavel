@@ -12,6 +12,7 @@ const categories = [
   "Projetos aprovados",
   "Relatórios",
   "Certidões",
+  "Balanço Patrimonial",
   "Prestação de contas",
   "Outros documentos"
 ];
