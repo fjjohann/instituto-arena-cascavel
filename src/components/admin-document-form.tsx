@@ -9,7 +9,7 @@ import { useRef, useState, type FormEvent } from "react";
 const categories = [
   "Estrutura Organizacional",
   "Estatuto",
-  "CNPJ e documentos institucionais",
+  "Atas de eleição",
   "Projetos aprovados",
   "Relatórios",
   "Certidões",

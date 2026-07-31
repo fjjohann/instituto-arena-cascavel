@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Transparência" };
 const categoryOrder = [
   "Estrutura Organizacional",
   "Estatuto",
-  "CNPJ e documentos institucionais",
+  "Atas de eleição",
   "Projetos aprovados",
   "Relatórios",
   "Certidões",
