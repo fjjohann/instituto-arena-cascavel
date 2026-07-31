@@ -13,7 +13,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ e
         <aside className="rounded-md bg-forest p-6 text-white">
           <a className="block text-white/75 hover:text-lime" href="mailto:institutoarenacascavel@gmail.com">institutoarenacascavel@gmail.com</a>
           <a className="block text-white/75 hover:text-lime" href="https://wa.me/5541999260098" rel="noreferrer" target="_blank">(41) 99926-0098</a>
-          <p className="mt-5 text-white/75">Av. das Torres, 200, casa 123, Bairro Parque Verde, Cascavel PR</p>
+          <p className="mt-5 text-sm font-semibold uppercase text-lime">Endereço</p>
+          <p className="mt-1 text-white/75">Av. das Torres, 200, casa 123, Bairro Parque Verde, Cascavel PR</p>
           <p className="mt-5 text-sm font-semibold uppercase text-lime">Horário</p>
           <p className="mt-1 text-white/75">Segunda a sexta, das 13 às 17.</p>
         </aside>
