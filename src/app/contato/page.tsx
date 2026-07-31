@@ -11,9 +11,11 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ e
     <Section eyebrow="Contato" title="Converse com o Instituto Arena Cascavel.">
       <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
         <aside className="rounded-md bg-forest p-6 text-white">
-          <h2 className="text-2xl font-semibold">Canais oficiais</h2>
-          <a className="mt-5 block text-white/75 hover:text-lime" href="mailto:institutoarenacascavel@gmail.com">institutoarenacascavel@gmail.com</a>
+          <a className="block text-white/75 hover:text-lime" href="mailto:institutoarenacascavel@gmail.com">institutoarenacascavel@gmail.com</a>
           <a className="block text-white/75 hover:text-lime" href="https://wa.me/5541999260098" rel="noreferrer" target="_blank">(41) 99926-0098</a>
+          <p className="mt-5 text-white/75">Av. das Torres, 200, casa 123, Bairro Parque Verde, Cascavel PR</p>
+          <p className="mt-5 text-sm font-semibold uppercase text-lime">Horário</p>
+          <p className="mt-1 text-white/75">Segunda a sexta, das 13 às 17.</p>
         </aside>
         <form className="grid gap-4 rounded-md bg-white p-6 shadow-sm" action="/api/contact" method="post">
           {params.enviado ? (
